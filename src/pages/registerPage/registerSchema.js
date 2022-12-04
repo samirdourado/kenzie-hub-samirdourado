@@ -33,8 +33,8 @@ export const registerSchema = yup.object().shape({
     contact: yup
         .string("Contato obrigatório")
         .required("Contato é obrigatório")
-        .min(6, "Informe seu contato com pelo menos 6 caracteres")
-        .max(11, "Máximo 11 caracteres com DDD"),
+        .min(8, "Informe seu contato com pelo menos 6 caracteres")
+        .max(50, "Máximo 50 caracteres"),
 
     course_module: yup
         .string()

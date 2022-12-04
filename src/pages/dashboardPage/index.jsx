@@ -1,44 +1,37 @@
-import { useForm } from "react-hook-form"
 import { Link } from "react-router-dom"
-import { Button } from "../../components/buttons"
+import { ButtonExit } from "../../components/buttons"
+import { ContainerUserLogged, UserHeader, UserMain, UserNav } from "../../components/containerProfile/style"
+import { Logo, Title, TitleSub } from "../../styles/typography"
 
-export function DashBoardPage({user, logoutUser, userStoraged}) {
+export function DashBoardPage({logoutUser, userStoraged}) {    
     
     const loggedUser = JSON.parse(userStoraged)
-    
-    // console.log(user.user)
-    // console.log(userStoraged)
-    // console.log(loggedUser.user)
 
-    return(
-        
-        <div>
-            <nav>
-                <p>Kenzie Hub</p>
-                <Button logoutUser={logoutUser} text="Sair"/>
-            </nav>
+    return(        
+        <div>            
             {
-                loggedUser.user ? (
+                loggedUser === null ? (
                 <>
-                    <header>
-                        <p>Olá {loggedUser.user.name}</p>
-                        <p>Olá {loggedUser.user.course_module}</p>
-                    </header>
-                    <main>
-                        <p>Que pena! Estamos em desenvolvimento.</p>
-                        <p>Nossa aplicação está em desenvolvimento, em breve teremos novidades</p>
-                    </main>
+                    <Title>Sessão expirada</Title>
+                    <Link to="/">Faça o Login</Link>                    
                 </>
             ) : (
-                <>
-                    <p>Sessão expirada</p>
-                    <Link to="/">Faça o Login</Link>
-                </>
+                <ContainerUserLogged>
+                    <UserNav>
+                        <Logo>Kenzie Hub</Logo>
+                        <ButtonExit text="Sair" type={"submit"} logoutUser={logoutUser} />
+                    </UserNav>                    
+                    <UserHeader>
+                        <Title>Olá {loggedUser.user.name}</Title>
+                        <TitleSub>Olá {loggedUser.user.course_module}</TitleSub>
+                    </UserHeader>
+                    <UserMain>
+                        <Title>Que pena! Estamos em desenvolvimento.</Title>
+                        <TitleSub>Nossa aplicação está em desenvolvimento, em breve teremos novidades</TitleSub>
+                    </UserMain>
+                </ContainerUserLogged>
                 )
             }
-
-
-        </div>
-        
+        </div>        
     )
 }

@@ -1,13 +1,14 @@
 import React from "react"
+import { OptionToSelect, Select } from "./style"
 
 export function SelectField({register}) {
     return(
-        <select {...register("course_module")}>
-            <option value="">Escolha</option>
-            <option value="Primeiro módulo (Introdução ao Frontend)">Primeiro módulo (Introdução ao Frontend)</option>
-            <option value="Segundo módulo (Frontend Avançado)">Segundo módulo (Frontend Avançado)</option>
-            <option value="Terceiro módulo (Introdução ao Backend)">Terceiro módulo (Introdução ao Backend)</option>
-            <option value="Quarto módulo (Backend Avançado)">Quarto módulo (Backend Avançado)</option>
-    </select>
+        <Select {...register("course_module")}>
+            <OptionToSelect value="">Escolha um módulo</OptionToSelect>
+            <OptionToSelect value="Primeiro módulo (Introdução ao Frontend)">Primeiro módulo (Introdução ao Frontend)</OptionToSelect>
+            <OptionToSelect value="Segundo módulo (Frontend Avançado)">Segundo módulo (Frontend Avançado)</OptionToSelect>
+            <OptionToSelect value="Terceiro módulo (Introdução ao Backend)">Terceiro módulo (Introdução ao Backend)</OptionToSelect>
+            <OptionToSelect value="Quarto módulo (Backend Avançado)">Quarto módulo (Backend Avançado)</OptionToSelect>
+        </Select>
     )
 }

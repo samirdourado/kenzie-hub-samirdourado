@@ -1,6 +1,5 @@
 import styled from "styled-components"
 
-
 export const Logo = styled.p`
     color: var(--color-primary);
     width: 100%;
@@ -47,4 +46,11 @@ export const TitleSub = styled.p`
         line-height: 17.6px;
         transition: 0.8s ease-out;
     } 
+`
+
+export const InputErrorMessage = styled.p`
+    font-size: var(--headline);
+    font-size: 10px;
+    color: var(--color-primary);
+    font-weight: 400;
 `

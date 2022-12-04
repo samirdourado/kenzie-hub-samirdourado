@@ -42,11 +42,12 @@ export const GlobalStyle = createGlobalStyle`
     a {
         cursor: pointer;
         background-color: var(--grey3);
+        background-color: var(--grey1);
         border: none;
         border-radius: 4px;        
         font-weight: 600;
         font-size: var(--headline);
-        color: var(--grey0);        
+        color: var(--grey0);
         
         @media (max-width: 369px){
             padding: 12px 26px;

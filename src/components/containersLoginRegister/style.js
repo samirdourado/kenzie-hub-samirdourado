@@ -4,31 +4,43 @@ export const LogAndRegisterTitleArea = styled.div`
     width: 100%;
     min-width: 296px;
     max-width: 369px;
-    /* height: 150px; */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* background-color: blue; */
-
 `
 
 export const LogAndRegisterBg = styled.div`
-    background-color: var(--grey3); /*aliceblue;*/
+    background-color: var(--grey3);
     width: 100%;
     min-width: 296px;
     max-width: 369px;
-    /* height: 200px; */
     margin-top: 48px;
     border: none;
     border-radius: 4px;
-    padding: 28px 22px;
 
     @media (max-width: 369px){
-            transition: 0.8s ease-in;
-        }
+        transition: 0.8s ease-in;
+        padding: 28px 12px;
+    }
         
-        @media (min-width: 370px){         
-            transition: 0.8s ease-out;
-        } 
+    @media (min-width: 370px){         
+        transition: 0.8s ease-out;
+        padding: 28px 20px;
+    } 
 `
 
+export const LogAndRegisterHeader = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 20px;
+`
+
+export const LogAndRegisterFooter = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+    align-items: center;
+`

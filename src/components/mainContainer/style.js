@@ -11,12 +11,4 @@ export const MainContainer = styled.main`
     display: flex;
     flex-direction: column;
     align-items: center;
-
-    @media (max-width: 369px){
-
-    }
-
-    @media (min-width: 370px){
-        
-    }
 `

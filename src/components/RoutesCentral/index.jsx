@@ -5,13 +5,13 @@ import { LoginPage } from "../../pages/loginPage";
 import { NotFoundPage } from "../../pages/notFoundPage";
 import { RegisterPage } from "../../pages/registerPage";
 
-export function RoutesCentral({user, setUser, loginUser, logoutUser, userStoraged}) {
+export function RoutesCentral({user, setUser, registerNewUser, loginUser, logoutUser, userStoraged}) {
     return(
-        <Routes>            
+        <Routes>
             <Route path="/" element={<LoginPage setUser={setUser} loginUser={loginUser}/>}/>
-            <Route path="register" element={<RegisterPage/>}/>
+            <Route path="register" element={<RegisterPage registerNewUser={registerNewUser}/>}/>
             <Route path="dashboard" element={<DashBoardPage user={user} logoutUser={logoutUser} userStoraged={userStoraged}/>}/>
-            <Route path="*" element={<NotFoundPage/>}/>
+            <Route path="*" element={<NotFoundPage logoutUser={logoutUser}/>}/>
         </Routes>
     )
 }
