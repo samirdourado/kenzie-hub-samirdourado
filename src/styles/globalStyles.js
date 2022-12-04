@@ -7,6 +7,8 @@ export const GlobalStyle = createGlobalStyle`
         padding: 0;
         box-sizing: border-box;
         list-style: none;
+        font-family: "Inter", sans-serif;
+        text-decoration: none;
     }
 
     :root {
@@ -33,4 +35,27 @@ export const GlobalStyle = createGlobalStyle`
         --font-family: "Inter", sans-serif;
     }
 
+    body {
+        background-color: var(--grey4)
+    }
+
+    a {
+        cursor: pointer;
+        background-color: var(--grey3);
+        border: none;
+        border-radius: 4px;        
+        font-weight: 600;
+        font-size: var(--headline);
+        color: var(--grey0);        
+        
+        @media (max-width: 369px){
+            padding: 12px 26px;
+            transition: 0.8s ease-in;
+        }
+        
+        @media (min-width: 370px){
+            padding: 15px 16px;            
+            transition: 0.8s ease-out;
+        }        
+    }    
 `
