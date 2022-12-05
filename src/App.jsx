@@ -1,8 +1,7 @@
 import { useState } from "react"
-import { useForm } from "react-hook-form"
-import * as yup from "yup"
+
 import { GlobalStyle } from "./styles/globalStyles"
-import { RoutesCentral } from "./components/RoutesCentral"
+import { RoutesCentral } from "./RoutesCentral"
 import "react-toastify/dist/ReactToastify.css"
 import { apiData } from "./services/api"
 import { toast, ToastContainer } from "react-toastify"
@@ -34,10 +33,10 @@ function App() {
   async function loginUser(formData, setLoading) {
     try {
         setLoading(true)
-        const response = await apiData.post(`sessions`, formData)        
-        localStorage.setItem("@KenzieHub", JSON.stringify(response.data))
+        const response = await apiData.post(`sessions`, formData)
+        localStorage.setItem("@KenzieHub", JSON.stringify(response.data.token))
         toast.success("Login efetuado")
-        setUser(response.data)
+        setUser(response.data.user)
         navigate("/dashboard")
     } catch (error) {
         console.log(error)
