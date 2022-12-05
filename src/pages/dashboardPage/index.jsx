@@ -1,19 +1,16 @@
-import { Link } from "react-router-dom"
 import { ButtonExit } from "../../components/buttons"
 import { ContainerUserLogged, UserHeader, UserMain, UserNav } from "../../components/containerProfile/style"
 import { Logo, Title, TitleSub } from "../../styles/typography"
+import { NotFoundPage } from "../notFoundPage"
 
-export function DashBoardPage({logoutUser, userStoraged}) {    
+export function DashBoardPage({user, logoutUser}) {
     
-    const loggedUser = JSON.parse(userStoraged)
-
     return(        
         <div>            
             {
-                loggedUser === null ? (
+                user === null ? (
                 <>
-                    <Title>Sessão expirada</Title>
-                    <Link to="/">Faça o Login</Link>                    
+                    <NotFoundPage logoutUser={logoutUser}/>
                 </>
             ) : (
                 <ContainerUserLogged>
@@ -22,8 +19,8 @@ export function DashBoardPage({logoutUser, userStoraged}) {
                         <ButtonExit text="Sair" type={"submit"} logoutUser={logoutUser} />
                     </UserNav>                    
                     <UserHeader>
-                        <Title>Olá {loggedUser.user.name}</Title>
-                        <TitleSub>Olá {loggedUser.user.course_module}</TitleSub>
+                        <Title>Olá {user.name}</Title>
+                        <TitleSub>Olá {user.course_module}</TitleSub>
                     </UserHeader>
                     <UserMain>
                         <Title>Que pena! Estamos em desenvolvimento.</Title>

@@ -9,6 +9,4 @@ export const loginSchema = yup.object().shape({
     password: yup
         .string()
         .required("Senha obrigatória")
-        .min(6, "A senha precisa de pelo menos 6 caracteres")
-        .max(6, "Senha pode ter maximo de 6 caracteres")
 })
