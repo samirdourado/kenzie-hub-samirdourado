@@ -10,7 +10,7 @@ export function RoutesCentral({user, setUser, registerNewUser, loginUser, logout
         <Routes>
             <Route path="/" element={<LoginPage setUser={setUser} loginUser={loginUser}/>}/>
             <Route path="register" element={<RegisterPage registerNewUser={registerNewUser}/>}/>
-            <Route path="dashboard" element={<DashBoardPage user={user} logoutUser={logoutUser} userStoraged={userStoraged} />}/>
+            <Route path="dashboard" element={<DashBoardPage logoutUser={logoutUser}/>}/>
             <Route path="*" element={<NotFoundPage logoutUser={logoutUser}/>}/>
         </Routes>
     )

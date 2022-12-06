@@ -36,21 +36,21 @@ export const ButtonLogout = styled.button`
 
 export const LinkRef = styled.link`
     cursor: pointer;
-        background-color: var(--grey2);
-        border: none;
-        border-radius: 4px;        
-        font-weight: 600;
-        font-size: var(--headline);
-        color: var(--grey0);
+    background-color: var(--grey2);
+    border: none;
+    border-radius: 4px;        
+    font-weight: 600;
+    font-size: var(--headline);
+    color: var(--grey0);
 
-        @media (max-width: 369px){
-            padding: 12px 26px;
-            transition: 0.8s ease-in;
-        }
-        
-        @media (min-width: 370px){
-            padding: 15px 16px;            
-            transition: 0.8s ease-out;
-        }
+    @media (max-width: 369px){
+        padding: 12px 26px;
+        transition: 0.8s ease-in;
+    }
+    
+    @media (min-width: 370px){
+        padding: 15px 16px;            
+        transition: 0.8s ease-out;
+    }
 `
 
