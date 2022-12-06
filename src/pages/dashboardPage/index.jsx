@@ -2,13 +2,44 @@ import { ButtonExit } from "../../components/buttons"
 import { ContainerUserLogged, UserHeader, UserMain, UserNav } from "../../components/containerProfile/style"
 import { Logo, Title, TitleSub } from "../../styles/typography"
 import { NotFoundPage } from "../notFoundPage"
+import { apiData } from "../../services/api"
+import { useEffect, useState } from "react"
 
-export function DashBoardPage({user, logoutUser}) {
+export function DashBoardPage({logoutUser}) {
+    const [loading, setLoading] = useState(false)
+    const [userLogged, setUserLogged] = useState([])    
+    
+    useEffect(() => {
+        const getToken = JSON.parse(localStorage.getItem("@KenzieHub")) || [];
+        
+        if (getToken) {
+            const getApi = async () => {
+                try {
+                    const response = await apiData.get("profile", {
+                        headers: {
+                            "Authorization": `Bearer ${getToken}`
+                        }
+                    })
+                    
+                    setUserLogged({
+                        name: response.data.name,
+                        course_module: response.data.course_module,
+                    })
+                    
+                    } catch (error) {
+                        console.log(error)
+                    } finally {
+                        setLoading(true)
+                    }
+                }
+            getApi()
+        }
+    }, [])
     
     return(        
-        <div>            
+        <div>
             {
-                user === null ? (
+                userLogged.length === 0 ? (
                 <>
                     <NotFoundPage logoutUser={logoutUser}/>
                 </>
@@ -19,8 +50,8 @@ export function DashBoardPage({user, logoutUser}) {
                         <ButtonExit text="Sair" type={"submit"} logoutUser={logoutUser} />
                     </UserNav>                    
                     <UserHeader>
-                        <Title>Olá {user.name}</Title>
-                        <TitleSub>Olá {user.course_module}</TitleSub>
+                        <Title>Olá {userLogged.name}</Title>
+                        <TitleSub>Olá {userLogged.course_module}</TitleSub>
                     </UserHeader>
                     <UserMain>
                         <Title>Que pena! Estamos em desenvolvimento.</Title>

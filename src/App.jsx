@@ -5,7 +5,8 @@ import { RoutesCentral } from "./RoutesCentral"
 import "react-toastify/dist/ReactToastify.css"
 import { apiData } from "./services/api"
 import { toast, ToastContainer } from "react-toastify"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { useEffect } from "react"
 
 
 
@@ -34,10 +35,12 @@ function App() {
     try {
         setLoading(true)
         const response = await apiData.post(`sessions`, formData)
+        // console.log(response)
         localStorage.setItem("@KenzieHub", JSON.stringify(response.data.token))
         toast.success("Login efetuado")
         setUser(response.data.user)
         navigate("/dashboard")
+        // getLoggedUserData()
     } catch (error) {
         console.log(error)
         console.log(error.response.data)
@@ -63,6 +66,7 @@ function logoutUser() {
         loginUser={loginUser} 
         logoutUser={logoutUser} 
         userStoraged={userStoraged}
+        // getLoggedUserData={getLoggedUserData}
       />
 
       <GlobalStyle/>
