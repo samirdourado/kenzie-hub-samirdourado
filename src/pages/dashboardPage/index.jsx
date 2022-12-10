@@ -1,63 +1,103 @@
-import { ButtonExit } from "../../components/buttons"
-import { ContainerUserLogged, UserHeader, UserMain, UserNav } from "../../components/containerProfile/style"
+import { Button, ButtonExit, ButtonModalAdd } from "../../components/buttons"
+import { ContainerUserLogged, MainActionUserDiv, UserHeader, UserMain, UserNav } from "../../components/containerProfile/style"
 import { Logo, Title, TitleSub } from "../../styles/typography"
 import { NotFoundPage } from "../notFoundPage"
 import { apiData } from "../../services/api"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
+import { UserContext } from "../../contexts/userContext"
+import { ListTechs } from "../../components/listTechs"
+import { ListTechHolder } from "../../components/listTechs/style"
+import { ModalAdd } from "../../components/modalHolder"
+import { IoTrashBinOutline } from "react-icons/io5"
+import { ModalDetails } from "../../components/modalEditDelete"
+import { TechContext } from "../../contexts/techContext"
 
-export function DashBoardPage({logoutUser}) {
-    const [loading, setLoading] = useState(false)
-    const [userLogged, setUserLogged] = useState([])    
-    
-    useEffect(() => {
-        const getToken = JSON.parse(localStorage.getItem("@KenzieHub")) || [];
-        
-        if (getToken) {
-            const getApi = async () => {
-                try {
-                    const response = await apiData.get("profile", {
-                        headers: {
-                            "Authorization": `Bearer ${getToken}`
-                        }
-                    })
-                    
-                    setUserLogged({
-                        name: response.data.name,
-                        course_module: response.data.course_module,
-                    })
-                    
-                    } catch (error) {
-                        console.log(error)
-                    } finally {
-                        setLoading(true)
-                    }
-                }
-            getApi()
-        }
-    }, [])
+
+export function DashBoardPage() {
+
+    const { user, setUser, logoutUser } = useContext(UserContext)    
+    const { createTechnology, userTech, createModal, detailsModal, setDetailsModal, 
+        handleOpenModal, handleCloseModal, handleDetailsOpen, handleDetailsClose } = useContext(TechContext)
     
     return(        
         <div>
-            {
-                userLogged.length === 0 ? (
+            {               
+                user ? (
+                    <ContainerUserLogged>
+                        <UserNav>
+                            <Logo>Kenzie Hub</Logo>
+                            <ButtonExit text="Sair" type={"submit"} logoutUser={logoutUser} />
+                        </UserNav>                    
+                        <UserHeader>
+                            <Title>Olá {user.name}</Title>
+                            <TitleSub>{user.course_module}</TitleSub>
+                        </UserHeader>
+
+                        <UserMain>
+                            <MainActionUserDiv>
+                                <Title>Tecnologias</Title>
+                                <ButtonModalAdd
+                                    text="+"
+                                    type={"button"}
+                                    onClick={(event) => handleOpenModal(event)}                                    
+                                />
+                            </MainActionUserDiv>
+
+                            <ListTechHolder>                                
+                                {
+                                    user.techs.map((tech, i) =>                                    
+                                        <ListTechs
+                                            // key={tech.id}
+                                            key={i}
+                                            type="button"
+                                            text="X"
+                                            techId={tech.id}
+                                            techTitle={tech.title}
+                                            techStatus={tech.status}
+                                            onClick={(event) => handleDetailsOpen(event)}
+                                            i={i}
+                                            tech={tech}
+                                            
+                                        />
+                                    )
+                                }
+                            </ListTechHolder>
+
+                            {
+                                createModal ? 
+                                    <ModalAdd
+                                        type="button"
+                                        text="X"
+                                        onClick={(event) => handleCloseModal(event)}
+                                        // submit={submit}
+                                        handleCloseModal={handleCloseModal}
+                                        
+                                    />
+                                    : 
+                                    <>
+                                </>
+                            }
+                            {/* { console.log(user.techs) } */}
+
+                            {   
+                                
+                                detailsModal ?
+                                    <ModalDetails                                        
+                                        type="button"
+                                        // text="X"
+                                        onClick={(event) => handleDetailsClose(event)}
+                                    />
+                                    :
+                                    <>
+                                </>                                
+                            }
+                        </UserMain>
+
+                    </ContainerUserLogged>
+            ) : (
                 <>
                     <NotFoundPage logoutUser={logoutUser}/>
-                </>
-            ) : (
-                <ContainerUserLogged>
-                    <UserNav>
-                        <Logo>Kenzie Hub</Logo>
-                        <ButtonExit text="Sair" type={"submit"} logoutUser={logoutUser} />
-                    </UserNav>                    
-                    <UserHeader>
-                        <Title>Olá {userLogged.name}</Title>
-                        <TitleSub>Olá {userLogged.course_module}</TitleSub>
-                    </UserHeader>
-                    <UserMain>
-                        <Title>Que pena! Estamos em desenvolvimento.</Title>
-                        <TitleSub>Nossa aplicação está em desenvolvimento, em breve teremos novidades</TitleSub>
-                    </UserMain>
-                </ContainerUserLogged>
+                </>                
                 )
             }
         </div>        

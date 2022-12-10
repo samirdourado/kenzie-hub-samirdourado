@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
 import { useForm } from "react-hook-form"
 import { Link, } from "react-router-dom"
 import { LogAndRegisterBg, LogAndRegisterHeader, LogAndRegisterTitleArea } from "../../components/containersLoginRegister/style"
@@ -11,8 +11,10 @@ import { Button } from "../../components/buttons"
 import { Logo, Title, TitleSub, InputErrorMessage } from "../../styles/typography"
 import { FormLogAndRegister, FormDivToInput } from "../../components/form/style"
 import { SelectLabel } from "../../components/select/style"
+import { UserContext } from "../../contexts/userContext"
 
-export function RegisterPage({registerNewUser}) {
+export function RegisterPage({}) {
+    const { registerNewUser } = useContext(UserContext)
     const [loading, setLoading] = useState(false)
 
     const { register, handleSubmit, formState: {errors}, reset } = useForm({
