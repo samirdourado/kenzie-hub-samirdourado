@@ -54,3 +54,48 @@ export const LinkRef = styled.link`
     }
 `
 
+export const ButtonAdd = styled.button`
+    cursor: pointer;
+    width: 100%;
+    max-width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    border: 1px solid var(--grey3);
+    background-color: var(--grey3);    
+    color: var(--grey1);
+    font-weight: 500;
+    font-size: var(--title1);
+    outline: none;
+    
+    
+
+    &&:hover {
+        border: 1px solid var(--color-primary);
+        background-color: var(--color-primary);
+        color: var(--grey0);
+        transition: 0.8s ease-out
+    }
+`
+
+export const ButtonSub = styled.button`
+    cursor: pointer;
+    width: 95%;
+    height: 48px;
+    border-radius: 4px;
+    border: 1px solid var(--grey2);
+    background-color: var(--grey2);    
+    color: var(--grey1);
+    font-weight: 500;
+    font-size: var(--title1);
+    outline: none;
+    /* margin: 0 5px 20px 5px; */
+    margin-bottom: 20px;
+
+    &&:hover {
+        border: 1px solid var(--color-primary);
+        background-color: var(--color-primary);
+        color: var(--grey0);
+        transition: 0.8s ease-out
+    }
+`
+

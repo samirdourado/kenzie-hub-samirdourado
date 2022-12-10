@@ -1,7 +1,7 @@
 import React from "react"
 import { OptionToSelect, Select } from "./style"
 
-export function SelectField({register}) {
+export function SelectField({ register }) {
     return(
         <Select {...register("course_module")}>
             <OptionToSelect value="">Escolha um módulo</OptionToSelect>

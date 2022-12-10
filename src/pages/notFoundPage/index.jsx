@@ -1,8 +1,13 @@
 import { ContainerUserLogged, LostNav, UserNav } from "../../components/containerProfile/style"
 import { Logo, Title } from "../../styles/typography"
 import { ButtonExit } from "../../components/buttons"
+import { useContext } from "react"
+import { UserContext } from "../../contexts/userContext"
 
-export function NotFoundPage({logoutUser}) {
+export function NotFoundPage() {
+
+    const { logoutUser } = useContext(UserContext)
+
     return(
         <ContainerUserLogged>
             <LostNav>

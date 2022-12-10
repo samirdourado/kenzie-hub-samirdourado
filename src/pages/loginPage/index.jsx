@@ -6,11 +6,15 @@ import { MainContainer } from "../../components/mainContainer/style"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { loginSchema } from "./loginSchema"
 import { Button } from "../../components/buttons"
-import { useState } from "react"
+import { useState, useContext } from "react"
 import { FormDivToInput, FormLogAndRegister } from "../../components/form/style"
 import { InputErrorMessage, Logo, Title, TitleSub } from "../../styles/typography"
+import { UserContext } from "../../contexts/userContext"
 
-export function LoginPage({setUser, loginUser}) {
+export function LoginPage({}) {
+
+    const { loginUser } = useContext(UserContext)
+
     const [loading, setLoading] =useState(false)
 
     const { register, handleSubmit, formState: {errors}, reset } = useForm({
