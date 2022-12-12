@@ -1,6 +1,5 @@
 import React from "react"
 import { OptionToSelect, Select } from "../select/style"
-// import { OptionToSelect, Select } from "./style"
 
 export function SelectTech({ register }) {
     return(

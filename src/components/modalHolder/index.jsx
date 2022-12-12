@@ -2,6 +2,7 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import { React, useContext } from "react"
 import { useForm } from "react-hook-form"
 import { TechContext } from "../../contexts/techContext"
+import { UserContext } from "../../contexts/userContext"
 import { InputErrorMessage, Title } from "../../styles/typography"
 import { Button, ButtonGeneric } from "../buttons"
 import { FormDivToInput } from "../form/style"
@@ -11,9 +12,10 @@ import { SelectTech } from "../selectTech"
 import { newTechSchema } from "./newTechSchema"
 import { BackdropModal, ModalBody, ModalHolder, ModalTitle } from "./style"
 
-export function ModalAdd({ type, text, onClick, handleCloseModal }) {
+export function ModalAdd({ type, text, }) {
 
-    const { createTechnology, handleDetailsOpen } = useContext(TechContext)
+    const { loading, setLoading } = useContext(UserContext)
+    const { createTechnology, setCreateModal } = useContext(TechContext)
     
     const { register, handleSubmit, formState: {errors}, reset } = useForm({
         mode: "onBlur",
@@ -22,7 +24,7 @@ export function ModalAdd({ type, text, onClick, handleCloseModal }) {
 
     const submit = (eventLoginData) => {
         createTechnology(eventLoginData)
-        reset()        
+        reset()
     }
 
     return(
@@ -30,7 +32,7 @@ export function ModalAdd({ type, text, onClick, handleCloseModal }) {
             <ModalHolder>
                 <ModalTitle>
                     <Title>Cadastrar Tecnologia</Title>
-                    <ButtonGeneric type={type} text={text} onClick={onClick}/>
+                    <ButtonGeneric type={type} text={text} onClick={() => setCreateModal(false)}/>
                 </ModalTitle>
                 
                 <ModalBody noValidate onSubmit={handleSubmit(submit)}>
@@ -45,7 +47,7 @@ export function ModalAdd({ type, text, onClick, handleCloseModal }) {
                         {errors.status && <InputErrorMessage>{errors.status.message}</InputErrorMessage>}
                     </FormDivToInput>
                     
-                    <Button text="Cadastrar Tecnologia" type={"submit"} onClick={() => handleDetailsOpen()} />
+                    <Button text={loading ? "Cadastrando..." : "Cadastrar Tecnologia"} type={"submit"} onClick={() => {createTechnology(), setLoading(true)}} />
                 </ModalBody>
 
             </ModalHolder>
