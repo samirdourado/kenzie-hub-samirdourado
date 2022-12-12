@@ -15,9 +15,7 @@ export const BackdropModal = styled.div`
 `
 
 export const ModalHolder = styled.div`
-    width: 100%;
-    /* height:100%;
-    max-height: 342px; */
+    width: 100%;    
     min-width: 296px;
     max-width: 396px;
     background-color: var(--grey3);
@@ -34,7 +32,6 @@ export const ModalTitle = styled.div`
     min-width: 296px;
     max-width: 396px;
     background-color: var(--grey2);
-    /* margin: 0 10px */
     display: flex;
     justify-content: space-between;
     align-items: center;

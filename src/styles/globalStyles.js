@@ -58,5 +58,19 @@ export const GlobalStyle = createGlobalStyle`
             padding: 15px 16px;            
             transition: 0.8s ease-out;
         }        
-    }    
+    } 
+    
+    .spinner {    
+    animation: loading 1.5s infinite
+    }
+
+    @keyframes loading {
+        0% {
+            transform: rotateY(0deg);
+        }
+
+        100% {
+            transform: rotateY(360deg);
+        }
+    }
 `

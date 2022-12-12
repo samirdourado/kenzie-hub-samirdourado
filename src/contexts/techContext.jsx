@@ -7,80 +7,83 @@ export const TechContext = createContext({})
 
 export function TechProvider({ children }) {
 
-    const { user, setUser, } = useContext(UserContext)
-    // console.log(user)
-    const [loading, setLoading] = useState(false)
+    const getToken = JSON.parse(localStorage.getItem("@KenzieHub"))
+
+    const { setUser, loading, setLoading, delLoading, setDelLoading } = useContext(UserContext)
+    
     const [ createModal, setCreateModal ] = useState(false)
     const [ detailsModal, setDetailsModal] = useState(false)
-    // const [ userTech, setUserTech] =useState({})
-    // console.log(userTech)
-
-    function handleOpenModal(event) {
-        event.preventDefault()
-        setCreateModal(true)
-    }
-
-    function handleCloseModal(event) {
-        event.preventDefault()
-        setCreateModal(false)    
-    }
-
-    function handleDetailsOpen(event) {
-        event.preventDefault()
-        setDetailsModal(true)
-    }
-    
-    function handleDetailsClose(event) {
-        event.preventDefault()
-        setDetailsModal(false)
-    }
-
-
+    const [ userTech, setUserTech] = useState()
 
     async function createTechnology(formData) {
-        console.log(formData)
-        const getToken = JSON.parse(localStorage.getItem("@KenzieHub"))
-        console.log(getToken)
-
-        
-        
         try {           
             const response = await apiData.post("users/techs", formData, {
-                        headers: {
-                            "Authorization": `Bearer ${getToken}`
-                        }
-                    })
-            console.log(response)
-            // handleCloseModal()
+                headers: {
+                    "Authorization": `Bearer ${getToken}`
+                }
+            })
+            setUserTech(response)
+            setCreateModal(false)
         } catch (error) {
             console.log(error)            
         }
     }
 
+    async function editTechnology(formData, id) {
+        try {    
+            setLoading(true)
+            const response = await apiData.put(`users/techs/${id}`, formData, {
+                headers: {
+                    "Authorization": `Bearer ${getToken}`
+                }
+            })
+            setUserTech(response)
+            setDetailsModal(false)
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setLoading(false)
+        }
+    }
 
-    async function editTechnology(id, formData) {
-        console.log(id, formData)
-        const getToken = JSON.parse(localStorage.getItem("@KenzieHub"))
-        // console.log(getToken)
-        
-        try {           
-            const response = await apiData.post(`users/techs${id}`, formData, {
+    async function deleteTechnology(id) {
+        try {
+            setDelLoading(true)
+            const response = await apiData.delete(`users/techs/${id}`, {                        
+                headers: {
+                    "Authorization": `Bearer ${getToken}`
+                }
+            })
+            setUserTech(response)
+            setDetailsModal(false)
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setDelLoading(false)
+        }
+    }
+
+    useEffect(() => {        
+        if (getToken) {
+            const getApi = async () => {
+                try {
+                    setLoading(true)
+                    const response = await apiData.get("profile", {
                         headers: {
                             "Authorization": `Bearer ${getToken}`
                         }
                     })
-            console.log(response)
-            // handleCloseModal()
-        } catch (error) {
-            console.log(error)            
-        }
-    }
+                    setUser(response.data)
 
-    function deleteTechnology(id) {
-        console.log(id)
-        const removedItem = user.techs.filter(tech => tech.id !== id)
-        setUser(removedItem)
-    }
+                    } catch (error) {
+                        console.log(error)
+                    } finally {
+                        setLoading(false)
+                    }
+                }
+            getApi()
+        }
+    }, [userTech])
 
     return(
         <TechContext.Provider value={{ 
@@ -88,15 +91,16 @@ export function TechProvider({ children }) {
             editTechnology,
             deleteTechnology,
             setLoading, 
-            handleOpenModal,
+            setCreateModal,
+            setDetailsModal,            
+            setUserTech,
+            setLoading,
             createModal, 
             detailsModal,
-            setDetailsModal,
-            handleCloseModal, 
-            handleDetailsOpen, 
-            handleDetailsClose }}>
+            userTech,
+            loading,
+        }}>
             { children }
         </TechContext.Provider>
     )
-
 }

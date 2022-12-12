@@ -1,23 +1,22 @@
-import { Button, ButtonExit, ButtonModalAdd } from "../../components/buttons"
+import { ButtonExit, ButtonModalAdd } from "../../components/buttons"
 import { ContainerUserLogged, MainActionUserDiv, UserHeader, UserMain, UserNav } from "../../components/containerProfile/style"
 import { Logo, Title, TitleSub } from "../../styles/typography"
 import { NotFoundPage } from "../notFoundPage"
-import { apiData } from "../../services/api"
-import { useEffect, useState, useContext } from "react"
+import { useContext } from "react"
 import { UserContext } from "../../contexts/userContext"
 import { ListTechs } from "../../components/listTechs"
 import { ListTechHolder } from "../../components/listTechs/style"
 import { ModalAdd } from "../../components/modalHolder"
-import { IoTrashBinOutline } from "react-icons/io5"
 import { ModalDetails } from "../../components/modalEditDelete"
 import { TechContext } from "../../contexts/techContext"
-
+import { Loader } from "../../components/loader"
+import { BiEqualizer } from "react-icons/bi"
 
 export function DashBoardPage() {
 
-    const { user, setUser, logoutUser } = useContext(UserContext)    
-    const { createTechnology, userTech, createModal, detailsModal, setDetailsModal, 
-        handleOpenModal, handleCloseModal, handleDetailsOpen, handleDetailsClose } = useContext(TechContext)
+    const { user, logoutUser, loading, setLoading } = useContext(UserContext) 
+
+    const { createModal, detailsModal, setDetailsModal, setUserTech, setCreateModal } = useContext(TechContext)
     
     return(        
         <div>
@@ -39,7 +38,7 @@ export function DashBoardPage() {
                                 <ButtonModalAdd
                                     text="+"
                                     type={"button"}
-                                    onClick={(event) => handleOpenModal(event)}                                    
+                                    onClick={() => setCreateModal(true)}                                    
                                 />
                             </MainActionUserDiv>
 
@@ -47,17 +46,18 @@ export function DashBoardPage() {
                                 {
                                     user.techs.map((tech, i) =>                                    
                                         <ListTechs
-                                            // key={tech.id}
-                                            key={i}
-                                            type="button"
-                                            text="X"
+                                            key={tech.id}
+                                            type="button"                                            
                                             techId={tech.id}
                                             techTitle={tech.title}
                                             techStatus={tech.status}
-                                            onClick={(event) => handleDetailsOpen(event)}
-                                            i={i}
                                             tech={tech}
-                                            
+                                            onClick={ 
+                                                () => {
+                                                    setDetailsModal(true);
+                                                    setUserTech(tech)
+                                                }
+                                             }
                                         />
                                     )
                                 }
@@ -67,25 +67,19 @@ export function DashBoardPage() {
                                 createModal ? 
                                     <ModalAdd
                                         type="button"
-                                        text="X"
-                                        onClick={(event) => handleCloseModal(event)}
-                                        // submit={submit}
-                                        handleCloseModal={handleCloseModal}
-                                        
+                                        text="X"                                        
                                     />
                                     : 
                                     <>
                                 </>
                             }
-                            {/* { console.log(user.techs) } */}
 
                             {   
                                 
                                 detailsModal ?
                                     <ModalDetails                                        
-                                        type="button"
-                                        // text="X"
-                                        onClick={(event) => handleDetailsClose(event)}
+                                        type="button"                                        
+                                        onClick={() => setDetailsModal(false)}
                                     />
                                     :
                                     <>
@@ -95,8 +89,8 @@ export function DashBoardPage() {
 
                     </ContainerUserLogged>
             ) : (
-                <>
-                    <NotFoundPage logoutUser={logoutUser}/>
+                <>                    
+                    <Loader />
                 </>                
                 )
             }

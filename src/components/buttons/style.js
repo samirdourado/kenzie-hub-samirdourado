@@ -58,22 +58,19 @@ export const ButtonAdd = styled.button`
     cursor: pointer;
     width: 100%;
     max-width: 32px;
-    height: 32px;
-    border-radius: 4px;
-    border: 1px solid var(--grey3);
+    height: 32px;    
+    border: none;
     background-color: var(--grey3);    
     color: var(--grey1);
     font-weight: 500;
     font-size: var(--title1);
     outline: none;
-    
-    
+    background-color: transparent;
 
-    &&:hover {
-        border: 1px solid var(--color-primary);
-        background-color: var(--color-primary);
+    &&:hover {        
         color: var(--grey0);
-        transition: 0.8s ease-out
+        color: var(--color-primary-focus);
+        transition: 0.5s ease-out
     }
 `
 

@@ -2,15 +2,15 @@ import { createContext, useState, useEffect } from "react"
 import { apiData } from "../services/api"
 import { useNavigate } from "react-router-dom"
 import { toast, ToastContainer } from "react-toastify"
+import { Loader } from "../components/loader"
 
 export const UserContext = createContext({})
 
-export function UserProvider({ children }) {
+export function UserProvider({ children }) {    
 
-    const userStoraged = localStorage.getItem("@KenzieHub")
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(false)
-    // const [userLogged, setUserLogged] = useState([])
+    const [delLoading, setDelLoading] = useState(false)
 
     const navigate = useNavigate()
 
@@ -35,7 +35,6 @@ export function UserProvider({ children }) {
             localStorage.setItem("@KenzieHub", JSON.stringify(response.data.token))
             toast.success("Login efetuado")
             setUser(response.data.user)
-
             navigate("/dashboard")
         } catch (error) {
             console.log(error)
@@ -47,7 +46,7 @@ export function UserProvider({ children }) {
     }
 
     function logoutUser() {
-        localStorage.removeItem("@KenzieHub")
+        localStorage.removeItem("@KenzieHub")        
         setUser(null)
         navigate("/")
     }
@@ -78,7 +77,16 @@ export function UserProvider({ children }) {
     
 
     return(
-        <UserContext.Provider value={{ user, setUser, loginUser, logoutUser, registerNewUser  }}>
+        <UserContext.Provider value={{ 
+            user, 
+            setUser, 
+            loginUser, 
+            logoutUser, 
+            registerNewUser, 
+            loading, 
+            setLoading, 
+            delLoading, 
+            setDelLoading  }}>
             { children }
         </UserContext.Provider>
     )
