@@ -16,23 +16,25 @@ export const UserNav = styled.nav`
     align-items: center;
 `
 
-export const UserHeader = styled.nav`
+export const UserHeader = styled.div`
     width: 100%;
     height: 72px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    padding: 10px 0;
     border-top: solid 2px var(--grey3);
     border-bottom: solid 2px var(--grey3);
 
     @media (max-width: 499px){
         flex-direction: column;
         transition: 0.8s ease-in;
+        align-items: flex-start;
     }
     
     @media (min-width: 500px){
         flex-direction: row;
         transition: 0.8s ease-out;
+        align-items: center;
     }
 `
 
@@ -42,16 +44,24 @@ export const UserMain = styled.nav`
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-    padding-top: 44px;
+    padding-top: 18px;
+    align-items: flex-start;
 
     @media (max-width: 499px){
-        align-items: center; 
+        /* align-items: center;  */
     }
     
     @media (min-width: 500px){
-        align-items: flex-start;
+        /* align-items: flex-start; */
         transition: 0.8s ease-out;
     }
+`
+
+export const MainActionUserDiv = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 21px;
 `
 
 export const LostNav = styled.nav`

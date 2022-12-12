@@ -1,17 +1,20 @@
 import { useForm } from "react-hook-form"
-import { Link, NavLink, useNavigate } from "react-router-dom"
+import { Link, } from "react-router-dom"
 import { LogAndRegisterBg, LogAndRegisterFooter } from "../../components/containersLoginRegister/style"
 import { Input } from "../../components/inputs"
 import { MainContainer } from "../../components/mainContainer/style"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { loginSchema } from "./loginSchema"
 import { Button } from "../../components/buttons"
-import { useState } from "react"
+import { useContext } from "react"
 import { FormDivToInput, FormLogAndRegister } from "../../components/form/style"
 import { InputErrorMessage, Logo, Title, TitleSub } from "../../styles/typography"
+import { UserContext } from "../../contexts/userContext"
 
-export function LoginPage({setUser, loginUser}) {
-    const [loading, setLoading] =useState(false)
+
+export function LoginPage({}) {
+
+    const { loginUser, loading, setLoading } = useContext(UserContext)
 
     const { register, handleSubmit, formState: {errors}, reset } = useForm({
         mode: "onBlur",
@@ -19,7 +22,7 @@ export function LoginPage({setUser, loginUser}) {
     })
 
     const submit = (eventLoginData) => {
-        loginUser(eventLoginData, setLoading)
+        loginUser(eventLoginData, setLoading(true))
         reset()
     }
 
@@ -44,7 +47,7 @@ export function LoginPage({setUser, loginUser}) {
                         {errors.password && <InputErrorMessage>{errors.password.message}</InputErrorMessage>}
                     </FormDivToInput>
                 
-                    <Button text={"Entrar"} type={"submit"} disabled={loading}>{loading ? "Entrando" : "Entrar"}</Button>
+                    <Button text={loading ? "Entrando..." : "Entrar"} type={"submit"} disabled={loading}></Button>
                 </FormLogAndRegister>
 
                 <LogAndRegisterFooter>
