@@ -45,14 +45,9 @@ export const UserMain = styled.nav`
     justify-content: space-between;
     flex-direction: column;
     padding-top: 18px;
-    align-items: flex-start;
-
-    @media (max-width: 499px){
-        /* align-items: center;  */
-    }
+    align-items: flex-start;    
     
-    @media (min-width: 500px){
-        /* align-items: flex-start; */
+    @media (min-width: 500px){        
         transition: 0.8s ease-out;
     }
 `

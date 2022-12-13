@@ -1,3 +1,5 @@
+// import { useContext } from "react"
+import { BiAddToQueue } from "react-icons/bi"
 import { Title, TitleSub } from "../../styles/typography"
 import { ButtonTrash } from "../buttons"
 import { ListTechAction, ListTechItem } from "./style"
@@ -12,5 +14,16 @@ export function ListTechs({ type, text, onClick, tech, techId, techTitle, techSt
                 <ButtonTrash type={type} text={text} onClick={onClick} />
             </ListTechAction>
         </ListTechItem>
+    )    
+}
+
+
+export function ListTechsEmpty() {
+    
+    return(
+        <>
+            <Title>Nenhuma tecnologia cadastrada!</Title>
+            <Title>Clique no botão { <BiAddToQueue/> }  para criar uma tecnologia.</Title>
+        </>
     )    
 }
