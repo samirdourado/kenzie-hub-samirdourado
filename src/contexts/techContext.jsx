@@ -1,6 +1,5 @@
 import { createContext, useState, useEffect, useContext } from "react"
 import { apiData } from "../services/api"
-import { toast, ToastContainer } from "react-toastify"
 import { UserContext } from "./userContext"
 
 export const TechContext = createContext({})
@@ -16,7 +15,7 @@ export function TechProvider({ children }) {
     const [ userTech, setUserTech] = useState()
 
     async function createTechnology(formData) {
-        try {           
+        try {
             const response = await apiData.post("users/techs", formData, {
                 headers: {
                     "Authorization": `Bearer ${getToken}`

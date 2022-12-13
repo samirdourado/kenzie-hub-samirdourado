@@ -85,7 +85,6 @@ export const ButtonSub = styled.button`
     font-weight: 500;
     font-size: var(--title1);
     outline: none;
-    /* margin: 0 5px 20px 5px; */
     margin-bottom: 20px;
 
     &&:hover {

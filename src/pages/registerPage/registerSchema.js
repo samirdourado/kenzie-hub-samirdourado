@@ -23,7 +23,6 @@ export const registerSchema = yup.object().shape({
         .min(6,"Minimo de 6 caracteres")
         .max(6, "Senha pode ter maximo de 6 caracteres")
         .oneOf([yup.ref("password"), null], "As senhas não coincidem"),
-        // .oneOf([yup.ref("password"), yup.ref("passwordConfirm")]),
 
     bio: yup
         .string()

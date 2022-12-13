@@ -47,7 +47,7 @@ export function ModalAdd({ type, text, }) {
                         {errors.status && <InputErrorMessage>{errors.status.message}</InputErrorMessage>}
                     </FormDivToInput>
                     
-                    <Button text={loading ? "Cadastrando..." : "Cadastrar Tecnologia"} type={"submit"} onClick={() => {createTechnology(), setLoading(true)}} />
+                    <Button text={loading ? "Cadastrando..." : "Cadastrar Tecnologia"} type={"submit"} onClick={() => createTechnology()} />
                 </ModalBody>
 
             </ModalHolder>
