@@ -1,8 +1,7 @@
 import { createContext, useState, useEffect } from "react"
 import { apiData } from "../services/api"
 import { useNavigate } from "react-router-dom"
-import { toast, ToastContainer } from "react-toastify"
-import { Loader } from "../components/loader"
+import { toast } from "react-toastify"
 
 export const UserContext = createContext({})
 
@@ -39,7 +38,7 @@ export function UserProvider({ children }) {
         } catch (error) {
             console.log(error)
             console.log(error.response.data)
-            toast.error("Ops! Algo deu errado")
+            toast.error("Ops! Algo deu errado")            
         } finally {
             setLoading(false)
         }
@@ -66,7 +65,7 @@ export function UserProvider({ children }) {
                     setUser(response.data)
 
                     } catch (error) {
-                        console.log(error)
+                        console.log(error)                        
                     } finally {
                         setLoading(false)
                     }
@@ -74,6 +73,8 @@ export function UserProvider({ children }) {
             getApi()
         }
     }, [])
+
+
     
 
     return(

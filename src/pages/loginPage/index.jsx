@@ -22,7 +22,7 @@ export function LoginPage({}) {
     })
 
     const submit = (eventLoginData) => {
-        loginUser(eventLoginData, setLoading(true))
+        loginUser(eventLoginData, )
         reset()
     }
 

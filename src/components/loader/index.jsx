@@ -1,5 +1,5 @@
 import { BiEqualizer } from "react-icons/bi"
-import { LoaderHolder, LoaderSpinner } from "./style"
+import { LoaderHolder } from "./style"
 
 export function Loader() {
     return (

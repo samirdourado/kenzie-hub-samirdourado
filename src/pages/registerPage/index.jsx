@@ -1,4 +1,4 @@
-import { useState, useContext } from "react"
+import { useContext } from "react"
 import { useForm } from "react-hook-form"
 import { Link, } from "react-router-dom"
 import { LogAndRegisterBg, LogAndRegisterHeader, LogAndRegisterTitleArea } from "../../components/containersLoginRegister/style"
