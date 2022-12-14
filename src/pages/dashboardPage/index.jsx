@@ -8,34 +8,17 @@ import { ListTechHolder } from "../../components/listTechs/style"
 import { ModalAdd } from "../../components/modalHolder"
 import { ModalDetails } from "../../components/modalEditDelete"
 import { TechContext } from "../../contexts/techContext"
-import { Loader } from "../../components/loader"
-import { NotFoundPage } from "../notFoundPage"
-import { BiAddToQueue } from "react-icons/bi"
-import { Link, Navigate, useNavigate } from "react-router-dom"
 
 export function DashBoardPage() {
 
-    const { user, logoutUser, loading, setLoading } = useContext(UserContext) 
+    const { user, logoutUser } = useContext(UserContext) 
 
-    const { createModal, detailsModal, setDetailsModal, setUserTech, setCreateModal } = useContext(TechContext)
-
-    const getToken = JSON.parse(localStorage.getItem("@KenzieHub"))
-
-    const navigate = useNavigate()
+    const { createModal, detailsModal, setDetailsModal, setUserTech, setCreateModal } = useContext(TechContext)    
     
     return(
-        <div>
-
-            {
-                getToken === null &&
-                navigate("*")
-                // <NotFoundPage/>
-            }
-             
-
-            {
-                user && 
-
+        <div>            
+            { user &&
+                            
                 <ContainerUserLogged>
                     <UserNav>
                         <Logo>Kenzie Hub</Logo>
@@ -104,11 +87,10 @@ export function DashBoardPage() {
                                 :
                                 <>
                             </>                                
-                        }
+                        }                    
                     </UserMain>
-                    {loading && <Loader/>}
-                </ContainerUserLogged>
+                </ContainerUserLogged>                               
             }
-        </div>        
+        </div> 
     )
 }

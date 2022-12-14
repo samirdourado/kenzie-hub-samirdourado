@@ -4,16 +4,18 @@ import { DashBoardPage } from "../pages/dashboardPage";
 import { LoginPage } from "../pages/loginPage";
 import { NotFoundPage } from "../pages/notFoundPage";
 import { RegisterPage } from "../pages/registerPage";
+import { ProtectedRout } from "./ProtectedRout.jsx";
 
 export function RoutesCentral() {
-    return(
-        <Routes>
-            <Route path="/" element={<LoginPage/>}/>
-            <Route path="register" element={<RegisterPage />}/>
-            <Route path="dashboard" element={<DashBoardPage/>}/>
+  return (
+    <Routes>
+      <Route path="/" element={<LoginPage />} />
+      <Route path="register" element={<RegisterPage />} />
+      <Route path="*" element={<NotFoundPage />} />
 
-            {/* <Route path="*" element={<Navigate to="/"/>}/> */}
-            <Route path="*" element={<NotFoundPage/>}/>
-        </Routes>
-    )
+      <Route element={<ProtectedRout/>}>        
+        <Route path="dashboard" element={<DashBoardPage />} />        
+    </Route>      
+    </Routes>
+  );
 }
