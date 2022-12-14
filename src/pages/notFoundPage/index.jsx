@@ -4,7 +4,7 @@ import { ButtonExit } from "../../components/buttons"
 import { useContext } from "react"
 import { UserContext } from "../../contexts/userContext"
 
-export async function NotFoundPage() {
+export function NotFoundPage() {
     
     const { logoutUser } = useContext(UserContext)
 

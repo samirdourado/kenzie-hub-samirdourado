@@ -14,7 +14,7 @@ import { BackdropModal, ModalBody, ModalHolder, ModalTitle } from "./style"
 
 export function ModalAdd({ type, text, }) {
 
-    const { loading, setLoading } = useContext(UserContext)
+    const { loading } = useContext(UserContext)
     const { createTechnology, setCreateModal } = useContext(TechContext)
     
     const { register, handleSubmit, formState: {errors}, reset } = useForm({
@@ -47,7 +47,7 @@ export function ModalAdd({ type, text, }) {
                         {errors.status && <InputErrorMessage>{errors.status.message}</InputErrorMessage>}
                     </FormDivToInput>
                     
-                    <Button text={loading ? "Cadastrando..." : "Cadastrar Tecnologia"} type={"submit"} onClick={() => createTechnology()} />
+                    <Button text={loading ? "Cadastrando..." : "Cadastrar Tecnologia"} type={"submit"} />
                 </ModalBody>
 
             </ModalHolder>

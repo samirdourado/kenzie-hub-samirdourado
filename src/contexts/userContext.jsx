@@ -31,7 +31,7 @@ export function UserProvider({ children }) {
         try {
             setLoading(true)
             const response = await apiData.post(`sessions`, formData)
-            localStorage.setItem("@KenzieHub", JSON.stringify(response.data.token))
+            localStorage.setItem("@KenzieHub", response.data.token)
             toast.success("Login efetuado")
             setUser(response.data.user)
             navigate("/dashboard")
@@ -46,12 +46,11 @@ export function UserProvider({ children }) {
 
     function logoutUser() {
         localStorage.removeItem("@KenzieHub")        
-        setUser(null)
         navigate("/")
     }
     
     useEffect(() => {
-        const getToken = JSON.parse(localStorage.getItem("@KenzieHub"))
+        const getToken = localStorage.getItem("@KenzieHub")
         
         if (getToken) {
             const getApi = async () => {
@@ -61,9 +60,9 @@ export function UserProvider({ children }) {
                         headers: {
                             "Authorization": `Bearer ${getToken}`
                         }
-                    })
+                    })                    
                     setUser(response.data)
-
+                    navigate("/dashboard")
                     } catch (error) {
                         console.log(error)                        
                     } finally {
@@ -72,10 +71,7 @@ export function UserProvider({ children }) {
                 }
             getApi()
         }
-    }, [])
-
-
-    
+    }, [])    
 
     return(
         <UserContext.Provider value={{ 
