@@ -6,7 +6,7 @@ export const TechContext = createContext({})
 
 export function TechProvider({ children }) {
 
-    const getToken = JSON.parse(localStorage.getItem("@KenzieHub"))
+    const getToken = localStorage.getItem("@KenzieHub")
 
     const { setUser, loading, setLoading, delLoading, setDelLoading } = useContext(UserContext)
     
@@ -15,6 +15,7 @@ export function TechProvider({ children }) {
     const [ userTech, setUserTech] = useState()
 
     async function createTechnology(formData) {
+        
         try {
             const response = await apiData.post("users/techs", formData, {
                 headers: {
